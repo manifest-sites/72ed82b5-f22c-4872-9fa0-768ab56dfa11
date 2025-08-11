@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Scatter } from 'react-chartjs-2'
 import { Chart as ChartJS, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js'
+import dragDataPlugin from 'chartjs-plugin-dragdata'
 import { Input, Button, Card, Space, Typography, Row, Col } from 'antd'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 
-ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend)
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, dragDataPlugin)
 
 const { Title } = Typography
 
@@ -55,8 +56,27 @@ function CoordinateGraph() {
       },
       title: {
         display: true,
-        text: 'Coordinate Graph',
+        text: 'Coordinate Graph (Drag points to move them)',
       },
+      dragData: {
+        round: 2,
+        showTooltip: true,
+        onDragStart: function(e, element) {
+          // Optional: handle drag start
+        },
+        onDrag: function(e, datasetIndex, index, value) {
+          // Update coordinates while dragging
+          const newCoordinates = [...coordinates]
+          newCoordinates[index] = { x: value.x, y: value.y }
+          setCoordinates(newCoordinates)
+        },
+        onDragEnd: function(e, datasetIndex, index, value) {
+          // Final update when drag ends
+          const newCoordinates = [...coordinates]
+          newCoordinates[index] = { x: value.x, y: value.y }
+          setCoordinates(newCoordinates)
+        }
+      }
     },
     scales: {
       x: {
