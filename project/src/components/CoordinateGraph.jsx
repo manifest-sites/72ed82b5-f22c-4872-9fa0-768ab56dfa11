@@ -174,7 +174,7 @@ function CoordinateGraph() {
 
         <Col xs={24} lg={16}>
           <Card title="Graph">
-            <div style={{ height: '2800px' }}>
+            <div style={{ height: '600px' }}>
               {coordinates.length === 0 ? (
                 <div className="flex items-center justify-center h-full text-gray-500">
                   Add some coordinates to see them plotted here
