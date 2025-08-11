@@ -13,13 +13,14 @@ function CoordinateGraph() {
   const [coordinates, setCoordinates] = useState([])
   const [xInput, setXInput] = useState('')
   const [yInput, setYInput] = useState('')
+  const [colorInput, setColorInput] = useState('#3b82f6')
 
   const addCoordinate = () => {
     const x = parseFloat(xInput)
     const y = parseFloat(yInput)
     
     if (!isNaN(x) && !isNaN(y)) {
-      setCoordinates([...coordinates, { x, y }])
+      setCoordinates([...coordinates, { x, y, color: colorInput }])
       setXInput('')
       setYInput('')
     }
@@ -38,9 +39,9 @@ function CoordinateGraph() {
     datasets: [
       {
         label: 'Coordinates',
-        data: coordinates,
-        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-        borderColor: 'rgba(59, 130, 246, 1)',
+        data: coordinates.map(coord => ({ x: coord.x, y: coord.y })),
+        backgroundColor: coordinates.map(coord => coord.color || '#3b82f6'),
+        borderColor: coordinates.map(coord => coord.color || '#3b82f6'),
         pointRadius: 6,
         pointHoverRadius: 8,
       },
@@ -130,6 +131,15 @@ function CoordinateGraph() {
                   onPressEnter={addCoordinate}
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Color:</label>
+                <Input
+                  type="color"
+                  value={colorInput}
+                  onChange={(e) => setColorInput(e.target.value)}
+                  className="h-10"
+                />
+              </div>
               <Button 
                 type="primary" 
                 icon={<PlusOutlined />}
@@ -148,7 +158,13 @@ function CoordinateGraph() {
               ) : (
                 coordinates.map((coord, index) => (
                   <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                    <span>({coord.x}, {coord.y})</span>
+                    <div className="flex items-center gap-2">
+                      <div 
+                        className="w-4 h-4 rounded-full border border-gray-300" 
+                        style={{ backgroundColor: coord.color }}
+                      ></div>
+                      <span>({coord.x}, {coord.y})</span>
+                    </div>
                     <Button
                       type="text"
                       danger
