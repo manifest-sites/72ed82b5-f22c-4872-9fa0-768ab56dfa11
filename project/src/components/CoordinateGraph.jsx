@@ -173,7 +173,7 @@ function CoordinateGraph() {
         </Col>
 
         <Col xs={24} lg={16}>
-          <Card title="Graph" className="h-[600px]">
+          <Card title="Graph" className="h-[3000px]">
             <div className="h-full">
               {coordinates.length === 0 ? (
                 <div className="flex items-center justify-center h-full text-gray-500">
