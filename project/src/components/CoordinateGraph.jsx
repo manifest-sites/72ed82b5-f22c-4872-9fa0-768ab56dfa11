@@ -88,12 +88,16 @@ function CoordinateGraph() {
           display: true,
           text: 'X Axis',
         },
+        min: 0,
+        max: 10,
       },
       y: {
         title: {
           display: true,
           text: 'Y Axis',
         },
+        min: 0,
+        max: 10,
       },
     },
   }
@@ -169,7 +173,7 @@ function CoordinateGraph() {
         </Col>
 
         <Col xs={24} lg={16}>
-          <Card title="Graph" className="h-96">
+          <Card title="Graph" className="h-[600px]">
             <div className="h-full">
               {coordinates.length === 0 ? (
                 <div className="flex items-center justify-center h-full text-gray-500">
