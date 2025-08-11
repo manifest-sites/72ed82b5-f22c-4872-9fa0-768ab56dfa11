@@ -61,6 +61,8 @@ function CoordinateGraph() {
       dragData: {
         round: 2,
         showTooltip: true,
+        dragX: true,
+        dragY: true,
         onDragStart: function(e, element) {
           // Optional: handle drag start
         },
