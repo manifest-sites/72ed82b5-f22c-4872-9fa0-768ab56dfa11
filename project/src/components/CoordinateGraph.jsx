@@ -70,13 +70,13 @@ function CoordinateGraph() {
         onDrag: function(e, datasetIndex, index, value) {
           // Update coordinates while dragging
           const newCoordinates = [...coordinates]
-          newCoordinates[index] = { x: value.x, y: value.y }
+          newCoordinates[index] = { x: value.x, y: value.y, color: coordinates[index].color }
           setCoordinates(newCoordinates)
         },
         onDragEnd: function(e, datasetIndex, index, value) {
           // Final update when drag ends
           const newCoordinates = [...coordinates]
-          newCoordinates[index] = { x: value.x, y: value.y }
+          newCoordinates[index] = { x: value.x, y: value.y, color: coordinates[index].color }
           setCoordinates(newCoordinates)
         }
       }
